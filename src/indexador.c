@@ -63,7 +63,7 @@ int main(int argc, char ** argv){
 		}
 
 		printf(">>>>> Arquivo carregado!\n");
-		printf("linha: %s", linha[0]);
+		printf("linha: %s", linha);
 		return 0;
 	}
 
