@@ -4,6 +4,19 @@
 
 #define TAMANHO 1000
 
+#include <string.h>
+
+char *strsep(char **stringp, const char *delim) {
+    char *rv = *stringp;
+    if (rv) {
+        *stringp += strcspn(*stringp, delim);
+        if (**stringp)
+            *(*stringp)++ = '\0';
+        else
+            *stringp = 0; }
+    return rv;
+}
+
 int main(int argc, char ** argv){
 
 	FILE * in;
@@ -50,7 +63,7 @@ int main(int argc, char ** argv){
 		}
 
 		printf(">>>>> Arquivo carregado!\n");
-
+		printf("linha: %s", linha[0]);
 		return 0;
 	}
 
