@@ -8,7 +8,7 @@ struct Node {
     int linha;
 } No;
 
-void addNo(struct Node* raiz, struct Node* no);
+void addNo(struct No* raiz, struct No* no);
 
 
 
