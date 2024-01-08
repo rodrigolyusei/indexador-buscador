@@ -20,9 +20,14 @@ Caso tenha problemas para compilar, primeiro verifique:
 
 ## Instruções para execução
 
-Para compilar, primeiro se certique que está dentro da pasta src. Depois use o comando:
+Para compilar, use o comando:
 
 ```
 gcc indexador.c -o executavel
-executavel ../data/input/teste.txt
+```
+
+Agora para executar:
+
+```
+executavel data/input/teste.txt
 ```
