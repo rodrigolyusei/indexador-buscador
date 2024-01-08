@@ -3,23 +3,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-void addNo(struct Node** raiz, struct Node* no) {
+void addNo(struct Node** raiz, struct Node* nod) {
     if (*raiz== NULL) {
-        *raiz = no;
+        *raiz = nod;
     } else {
-        int i = strcmp(no->palavra, (*raiz)->palavra);
+        int i = strcmp(nod->palavra, (*raiz)->palavra);
         if ( i <= 0) {
             if ((*raiz)->esquerda == NULL) {
-                (*raiz)->esquerda = no;
+                (*raiz)->esquerda = nod;
             } else {
-                addNo(&((*raiz)->esquerda), no);
+                addNo(&((*raiz)->esquerda), nod);
 //Refaz a função porém comparando com o elemento a esquerda 
             }}
        if ( i > 0) {
             if ((*raiz)->direita == NULL) {
-                (*raiz)->direita = no;
+                (*raiz)->direita = nod;
             } else {
-                addNo(&((*raiz)->direita), no);
+                addNo(&((*raiz)->direita), nod);
             }
         }        
     }
