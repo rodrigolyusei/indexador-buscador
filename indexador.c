@@ -16,6 +16,7 @@ int main(int argc, char ** argv){
 	char * palavra;	
 	int contador_linha;
 
+	//Quando for passado apenas o arquivo do texto
 	if(argc == 2) {
 
 		in = fopen(argv[1], "r");
@@ -57,6 +58,7 @@ int main(int argc, char ** argv){
 		return 0;
 	}
 
+	//Quando for passado o arquivo do texto e o tipo da busca
 	if(argc == 3){
 		in = fopen(argv[1], "r");
 
