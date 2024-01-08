@@ -1,8 +1,21 @@
-#ifndef LISTA_H
-#define LISTA_H
+//#ifndef LISTA_H
+//#define ARVORE_H
 
-// colocar as funções aqui.
+typedef struct node {
 
+	char * palavra;
+    int * linhas;
+    int qntd;
+	struct node * proximo;
 
+} No;
 
-#endif
+typedef struct {
+	
+	No * primeiro;
+
+} Lista;
+
+Lista * cria_lista();
+int insere(Lista * lista, char * plvr);
+No * busca(Lista * lista, char * plvr);
