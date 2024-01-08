@@ -24,3 +24,16 @@ void addNo(struct Node* raiz, struct Node* no) {
         }        
     }
 }
+struct Node* Busca(struct Node* raiz,const char* plvr) {
+    if (raiz == NULL || plvr == NULL) {
+        return NULL;
+    }
+    int comp = strcmp(plvr, raiz->palavra);
+    if (comp == 0) {
+        return raiz; // O no é a raíz 
+    } else if (comp < 0) {
+        return Busca(raiz->esquerda,plvr); // Busca na subárvore esquerda
+    } else {
+        return Busca(raiz->direita,plvr);
+    }
+}
