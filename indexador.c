@@ -3,19 +3,9 @@
 #include <string.h>
 #include "arvore.h"
 #include "lista.h"
+#include "windows.h"
 
 #define TAMANHO 1000
-
-char *strsep(char **stringp, const char *delim) {
-    char *rv = *stringp;
-    if (rv) {
-        *stringp += strcspn(*stringp, delim);
-        if (**stringp)
-            *(*stringp)++ = '\0';
-        else
-            *stringp = 0; }
-    return rv;
-}
 
 int main(int argc, char ** argv){
 
@@ -41,8 +31,6 @@ int main(int argc, char ** argv){
 
 			printf("linha %03d: '%s'\n", contador_linha + 1, linha);
 
-			// TO DO: usar esse while para guardar as linhas
-
 			// fazemos uma copia do endereço que corresponde ao array de chars 
 			// usado para armazenar cada linha lida do arquivo pois a função 'strsep' 
 			// modifica o endereço do ponteiro a cada chamada feita a esta função (e 
@@ -59,8 +47,6 @@ int main(int argc, char ** argv){
 				// o conteúdo da linha anterior é sobreescrito.
 
 				printf("\t\t'%s'\n", palavra);
-
-				// TO DO: usar esse while para guardar as palavras
 			}
 
 			contador_linha++;
@@ -68,6 +54,49 @@ int main(int argc, char ** argv){
 
 		printf(">>>>> Arquivo carregado!\n");
 		printf("linhas: %i", contador_linha);
+		return 0;
+	}
+
+	if(argc == 3){
+		in = fopen(argv[1], "r");
+
+		contador_linha = 0;
+ 		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
+
+		while(in && fgets(linha, TAMANHO, in)){
+			
+			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
+
+			printf("linha %03d: '%s'\n", contador_linha + 1, linha);
+
+			// TO DO: usar esse while para guardar as linhas
+
+			copia_ponteiro_linha = linha;
+
+			while( (palavra = strsep(&copia_ponteiro_linha, " ")) ){
+
+				printf("\t\t'%s'\n", palavra);
+
+				// TO DO: usar esse while para guardar as palavras
+			}
+
+			contador_linha++;
+		}
+		
+		//Apresentacao das informacoes
+		printf("Tipo de indice: '%s'\n", argv[2]);
+		printf("Arquivo texto: '%s'\n", argv[1]);
+		printf("Numero de linhas no arquivo: %i\n", contador_linha);
+		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
+
+		//Busca
+		char * comando = (char *) malloc(TAMANHO * sizeof(char));
+		while(1){
+			printf("> ");
+			scanf("%s", comando);
+
+			if(strcasecmp(comando, "fim") == 0) return 0;
+		}
 		return 0;
 	}
 
