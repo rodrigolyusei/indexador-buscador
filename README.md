@@ -20,10 +20,13 @@ Caso tenha problemas para compilar, primeiro verifique:
 
 ## Instruções para execução
 
-Para compilar, use o comando:
+Para compilar, use os comandos:
 
 ```
-gcc indexador.c -o executavel
+gcc -c indexador.c -o indexador.o
+gcc -c arvore.c -o arvore.o
+gcc -c lista.c -o lista.o
+gcc indexador.o arvore.o lista.o -o executavel
 ```
 
 Agora para executar:

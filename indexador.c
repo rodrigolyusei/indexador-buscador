@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "arvore.h"
+#include "lista.h"
 
 #define TAMANHO 1000
-
-#include <string.h>
 
 char *strsep(char **stringp, const char *delim) {
     char *rv = *stringp;
