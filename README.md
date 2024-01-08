@@ -34,3 +34,7 @@ Agora para executar:
 ```
 executavel data/input/teste.txt
 ```
+
+## Considerações para a entrega
+
+Criamos a função strsep do zero já que ela não é padrão para bibliotecas do MinGW do Windows.

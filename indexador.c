@@ -41,6 +41,8 @@ int main(int argc, char ** argv){
 
 			printf("linha %03d: '%s'\n", contador_linha + 1, linha);
 
+			// TO DO: usar esse while para guardar as linhas
+
 			// fazemos uma copia do endereço que corresponde ao array de chars 
 			// usado para armazenar cada linha lida do arquivo pois a função 'strsep' 
 			// modifica o endereço do ponteiro a cada chamada feita a esta função (e 
@@ -57,13 +59,15 @@ int main(int argc, char ** argv){
 				// o conteúdo da linha anterior é sobreescrito.
 
 				printf("\t\t'%s'\n", palavra);
+
+				// TO DO: usar esse while para guardar as palavras
 			}
 
 			contador_linha++;
 		}
 
 		printf(">>>>> Arquivo carregado!\n");
-		printf("linha: %s", linha);
+		printf("linhas: %i", contador_linha);
 		return 0;
 	}
 
