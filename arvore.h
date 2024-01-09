@@ -1,12 +1,12 @@
 #ifndef ARVORE_H
 #define ARVORE_H
 
-struct Node {
+typedef struct Nod {
     char* palavra;
-    struct Node* esquerda;
-    struct Node* direita;
+    struct Nod* esquerda;
+    struct Nod* direita;
     int linha;
-} Nod;
+} Node;
 
 void addNo(struct Node** raiz, struct Node* no);
 struct Node* Busca(struct Node* raiz, const char* plvr);
