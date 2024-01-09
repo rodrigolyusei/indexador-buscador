@@ -8,7 +8,7 @@ typedef struct Nod {
     int linha;
 } Node;
 
-void addNo(struct Node** raiz, struct Node* no);
-struct Node* Busca(struct Node* raiz, const char* plvr);
+void addNo(Node** raiz, Node* no);
+Node* Busca(Node* raiz, const char* plvr);
 
 #endif
