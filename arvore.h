@@ -11,5 +11,4 @@ struct Node {
 void addNo(struct Node** raiz, struct Node* no);
 struct Node* Busca(struct Node* raiz, const char* plvr);
 
-
 #endif

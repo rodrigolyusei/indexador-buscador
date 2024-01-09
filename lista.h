@@ -1,5 +1,5 @@
-//#ifndef LISTA_H
-//#define ARVORE_H
+#ifndef LISTA_H
+#define LISTA_H
 
 typedef struct node {
 
@@ -17,5 +17,7 @@ typedef struct {
 } Lista;
 
 Lista * cria_lista();
-int insere(Lista * lista, char * plvr);
 No * busca(Lista * lista, char * plvr);
+int insere(Lista * lista, char * plvr);
+
+#endif
