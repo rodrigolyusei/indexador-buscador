@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void addNo(struct Node** raiz, struct Node* nod) {
+void addNo(Node** raiz, Node* nod) {
     if (*raiz== NULL) {
         *raiz = nod;
     } else {
@@ -24,7 +24,8 @@ void addNo(struct Node** raiz, struct Node* nod) {
         }        
     }
 }
-struct Node* Busca(struct Node* raiz,const char* plvr) {
+
+Node* Busca(Node* raiz,const char* plvr) {
     if (raiz == NULL || plvr == NULL) {
         return NULL;
     }
