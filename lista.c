@@ -22,7 +22,7 @@ No * busca(Lista * lista, char * plvr){
 	return NULL;
 }
 
-int insere(Lista * lista, char * plvr){
+int insere(Lista * lista, char * plvr, int lin){
 	//Se a palavra ja existe, apenas incrementa qntd
 	No * p = busca(lista, plvr);
 	if(p != NULL) {

@@ -1,12 +1,19 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-typedef struct node {
+typedef struct _linha_ {
+	
+	int pos;
+	struct _linha_ * proximo;
+
+} Linha;
+
+typedef struct _no_ {
 
 	char * palavra;
-    int * linhas;
+    Linha * linha;
     int qntd;
-	struct node * proximo;
+	struct _no_ * proximo;
 
 } No;
 

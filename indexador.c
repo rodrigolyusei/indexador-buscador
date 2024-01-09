@@ -60,11 +60,17 @@ int main(int argc, char ** argv){
 
 	//Quando for passado o arquivo do texto e o tipo da busca
 	if(argc == 3){
+		char c;
 		in = fopen(argv[1], "r");
 
 		contador_linha = 0;
  		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
 
+		while(in && fgets(linha, TAMANHO, in)){
+			contador_linha++;
+		}
+
+		/*
 		while(in && fgets(linha, TAMANHO, in)){
 			
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
@@ -83,22 +89,23 @@ int main(int argc, char ** argv){
 			}
 
 			contador_linha++;
-		}
-		
+		}*/
+
 		//Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
 		printf("Arquivo texto: '%s'\n", argv[1]);
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
 
-		//Busca
+		/*//Busca
 		char * comando = (char *) malloc(TAMANHO * sizeof(char));
 		while(1){
 			printf("> ");
 			scanf("%s", comando);
 
 			if(strcasecmp(comando, "fim") == 0) return 0;
-		}
+		}*/
+
 		return 0;
 	}
 
