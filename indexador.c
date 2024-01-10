@@ -32,7 +32,7 @@ int main(int argc, char ** argv){
 			
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
 
-			printf("linha %03d: '%s'\n", contador_linha + 1, linha);
+			printf("linha %03d: \"%s\"\n", contador_linha + 1, linha);
 
 			// fazemos uma copia do endereço que corresponde ao array de chars 
 			// usado para armazenar cada linha lida do arquivo pois a função 'strsep' 
@@ -54,7 +54,7 @@ int main(int argc, char ** argv){
 				if ((*palavra == '\0')) {
 					continue;
 				}
-				printf("\t\t'%s'\n", palavra);
+				printf("\t   '%s'\n", palavra);
 			}
 
 			contador_linha++;
