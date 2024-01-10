@@ -4,27 +4,27 @@
 typedef struct _linha_ {
 	
 	int pos;
-	struct _linha_ * proximo;
+	struct _linha_* proximo;
 
 } Linha;
 
 typedef struct _no_ {
 
-	char * palavra;
-    Linha * linha;
+	char* palavra;
+    Linha* linha;
     int qntd;
-	struct _no_ * proximo;
+	struct _no_* proximo;
 
 } No;
 
 typedef struct {
 	
-	No * primeiro;
+	No* primeiro;
 
 } Lista;
 
-Lista * cria_lista();
-No * busca(Lista * lista, char * plvr);
-int insere(Lista * lista, char * plvr);
+Lista* cria_lista();
+No* busca(Lista* lista, char* plvr);
+int insere(Lista* lista, char* plvr, int lin);
 
 #endif

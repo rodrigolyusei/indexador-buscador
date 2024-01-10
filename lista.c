@@ -3,16 +3,16 @@
 #include "lista.h"
 #include "windows.h"
 
-Lista * cria_lista(){
-	Lista * lista =  (Lista *) malloc (sizeof(Lista));
+Lista* cria_lista(){
+	Lista* lista =  (Lista*) malloc (sizeof(Lista));
 	lista->primeiro = NULL;
 	
 	return lista;
 }
 
-No * busca(Lista * lista, char * plvr){
+No* busca(Lista* lista, char* plvr){
 	int i = 0;
-	No * p = lista->primeiro;
+	No* p = lista->primeiro;
 
 	while(p && strcasecmp(plvr, p->palavra) <= 0 ){
 		p = p->proximo;
@@ -22,17 +22,17 @@ No * busca(Lista * lista, char * plvr){
 	return NULL;
 }
 
-int insere(Lista * lista, char * plvr, int lin){
+int insere(Lista* lista, char* plvr, int lin){
 	//Se a palavra ja existe, apenas incrementa qntd
-	No * p = busca(lista, plvr);
+	No* p = busca(lista, plvr);
 	if(p != NULL) {
 		p->qntd++;
 		return 0;
 	}
 
 	//Aloca o novo no
-	No * anterior;
-	No * novo = (No *) malloc(sizeof(No));
+	No* anterior;
+	No* novo = (No*) malloc(sizeof(No));
 
 	novo->palavra = plvr;
 	anterior = NULL;

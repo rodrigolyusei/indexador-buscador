@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "arvore.h"
 #include "lista.h"
+#include "arvore.h"
 #include "windows.h"
 
 #define TAMANHO 1000
@@ -17,6 +17,7 @@ int main(int argc, char ** argv){
 	int contador_linha;
 
 	//Quando for passado apenas o arquivo do texto
+	//Exemplo: .\EP texto.txt
 	if(argc == 2) {
 
 		in = fopen(argv[1], "r");
@@ -59,6 +60,7 @@ int main(int argc, char ** argv){
 	}
 
 	//Quando for passado o arquivo do texto e o tipo da busca
+	//Exemplo: .\EP texto.txt lista
 	if(argc == 3){
 		char c;
 		in = fopen(argv[1], "r");
@@ -97,14 +99,14 @@ int main(int argc, char ** argv){
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
 
-		/*//Busca
-		char * comando = (char *) malloc(TAMANHO * sizeof(char));
+		//Busca
+		char * comando = (char *) malloc(15 * sizeof(char));
 		while(1){
 			printf("> ");
-			scanf("%s", comando);
+			fgets(comando, 15, stdin);
 
-			if(strcasecmp(comando, "fim") == 0) return 0;
-		}*/
+			if(!strcmp(comando, "fim\n")) return 0;
+		}
 
 		return 0;
 	}
