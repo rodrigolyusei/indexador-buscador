@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "lista.h"
 #include "arvore.h"
 #include "windows.h"
@@ -40,14 +41,19 @@ int main(int argc, char ** argv){
 
 			copia_ponteiro_linha = linha;
 
-			while( (palavra = strsep(&copia_ponteiro_linha, " ")) ){
+			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-")) ){
 
 				// antes de guardar a palavra em algum tipo de estrutura usada
 				// para implementar o índice, será necessário fazer uma copia
 				// da mesma, uma vez que o ponteiro 'palavra' aponta para uma 
 				// substring dentro da string 'linha', e a cada nova linha lida
 				// o conteúdo da linha anterior é sobreescrito.
-
+				for (int i = 0; i < strlen(palavra); i++){
+					if (!isalpha(palavra[i])) palavra[i] = '\0';
+				}
+				if ((*palavra == '\0')) {
+					continue;
+				}
 				printf("\t\t'%s'\n", palavra);
 			}
 
