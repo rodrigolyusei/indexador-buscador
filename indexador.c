@@ -100,10 +100,10 @@ int main(int argc, char ** argv){
 		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
 
 		//Busca
-		char * comando = (char *) malloc(15 * sizeof(char));
+		char * comando = (char *) malloc(64 * sizeof(char));
 		while(1){
 			printf("> ");
-			fgets(comando, 15, stdin);
+			fgets(comando, 64, stdin);
 
 			if(!strcmp(comando, "fim\n")) return 0;
 		}
