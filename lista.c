@@ -25,16 +25,32 @@ No* busca(Lista* lista, char* plvr){
 int insere(Lista* lista, char* plvr, int lin){
 	//Se a palavra ja existe, apenas incrementa qntd
 	No* p = busca(lista, plvr);
-	if(p != NULL) {
+
+	Linha* result = (Linha*) malloc(sizeof(Linha));
+	result->pos = lin;
+
+	if(p) {
 		p->qntd++;
+
+		Linha* aux = p->linha;
+
+		// 1 2 --> 6
+		while (aux->proximo){
+			if (aux->proximo->pos == lin){
+				free(result);
+				return 0;
+			}
+			aux = aux->proximo;
+		}
+		aux->proximo = result;
 		return 0;
 	}
 
 	//Aloca o novo no
 	No* anterior;
 	No* novo = (No*) malloc(sizeof(No));
-
 	novo->palavra = plvr;
+	novo->linha = result;
 	anterior = NULL;
 	p = lista->primeiro;
 

@@ -15,7 +15,8 @@ int main(int argc, char ** argv){
 	char * copia_ponteiro_linha;
 	char * quebra_de_linha;
 	char * palavra;	
-	int contador_linha;
+	int contador_linha, i;
+	int posicao_na_lista;
 
 	//Quando for passado apenas o arquivo do texto
 	//Exemplo: .\EP texto.txt
@@ -83,20 +84,31 @@ int main(int argc, char ** argv){
 			
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
 
-			printf("linha %03d: '%s'\n", contador_linha + 1, linha);
+			// ADICIONAR OS PRINTS NA POSIÇÃO posicao_na_lista!!!!!!!!
+			printf("linha %03d: '%s'\n", posicao_na_lista + 1, linha);
 
 			// TO DO: usar esse while para guardar as linhas
 
 			copia_ponteiro_linha = linha;
 
-			while( (palavra = strsep(&copia_ponteiro_linha, " ")) ){
+			
+			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-")) ){
 
-				printf("\t\t'%s'\n", palavra);
+				for (int i = 0; i < strlen(palavra); i++){
+					if (!isalpha(palavra[i])) palavra[i] = '\0';
+				}
+				if ((*palavra == '\0')) {
+					continue;
+				}
 
-				// TO DO: usar esse while para guardar as palavras
+				// usar esse print para guardar as palavras na lista de palavras;
+				printf("\t   '%s'\n", palavra);
 			}
 
 			contador_linha++;
+		}
+
+			posicao_na_lista++;
 		}*/
 
 		//Apresentacao das informacoes
@@ -106,12 +118,43 @@ int main(int argc, char ** argv){
 		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
 
 		//Busca
-		char * comando = (char *) malloc(64 * sizeof(char));
+		char comando[64];
+		char verifica[6] = "busca ";
+		int buscaCorreta;
+		char* palavraBuscada = (char*) malloc(sizeof(char) * 58);
+
+
+
 		while(1){
+			for (i = 0; i < 58; i++){
+				palavraBuscada[i] = '\0';
+			}
 			printf("> ");
 			fgets(comando, 64, stdin);
-
 			if(!strcmp(comando, "fim\n")) return 0;
+
+			buscaCorreta = 1;
+
+			for(i = 0; i < 6; i++){
+				if(verifica[i] != comando[i]) {
+					buscaCorreta = 0;
+					break;
+				}
+			}
+			if (!buscaCorreta){
+				printf("Opcao invalida!!\n");
+				continue;
+			}
+
+			if(!isalpha(comando[6]) || !isalnum(comando[6])){
+				printf("Opcao invalida\n");
+				continue;
+			}
+			for(i = 6; !(comando[i] == ' ' || comando[i] == '\0'); i++){
+			 	palavraBuscada[i-6] = comando[i];
+			}
+			printf("%s", palavraBuscada);
+
 		}
 
 		return 0;

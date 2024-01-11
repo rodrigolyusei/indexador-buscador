@@ -16,3 +16,5 @@
     - int pos; struct _linha_ * proximo; 
         - Ordenar os numeros;
         - Remover duplicatas.
+
+- Terminar a lista!!!
