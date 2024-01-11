@@ -33,7 +33,7 @@ gcc indexador.o arvore.o lista.o windows.o -o executavel
 Agora para executar:
 
 ```
-.\executavel.exe data/input/teste.txt
+.\executavel.exe input/teste.txt
 ```
 
 ## Considerações para a entrega

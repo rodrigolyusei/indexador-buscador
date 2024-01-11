@@ -10,13 +10,13 @@
 
 int main(int argc, char ** argv){
 
-	FILE * in;
-	char * linha;
-	char * copia_ponteiro_linha;
-	char * quebra_de_linha;
-	char * palavra;	
-	int contador_linha, i;
-	int posicao_na_lista;
+	FILE* in;
+	char* linha;
+	char* copia_ponteiro_linha;
+	char* quebra_de_linha;
+	char* palavra;	
+	int i;
+	int contador_linha;
 
 	//Quando for passado apenas o arquivo do texto
 	//Exemplo: .\EP texto.txt
@@ -49,12 +49,7 @@ int main(int argc, char ** argv){
 				// da mesma, uma vez que o ponteiro 'palavra' aponta para uma 
 				// substring dentro da string 'linha', e a cada nova linha lida
 				// o conteúdo da linha anterior é sobreescrito.
-				for (int i = 0; i < strlen(palavra); i++){
-					if (!isalpha(palavra[i])) palavra[i] = '\0';
-				}
-				if ((*palavra == '\0')) {
-					continue;
-				}
+
 				printf("\t   '%s'\n", palavra);
 			}
 
@@ -69,28 +64,38 @@ int main(int argc, char ** argv){
 	//Quando for passado o arquivo do texto e o tipo da busca
 	//Exemplo: .\EP texto.txt lista
 	if(argc == 3){
-		char c;
+
 		in = fopen(argv[1], "r");
 
 		contador_linha = 0;
  		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
 
+		//Conta as linhas do arquivo e cria o array
 		while(in && fgets(linha, TAMANHO, in)){
 			contador_linha++;
 		}
 
-		/*
+		char** linhas = (char**) malloc(sizeof(char*) * contador_linha);
+
+		contador_linha = 0;
+
+		//Cria a lista efetivamente
 		while(in && fgets(linha, TAMANHO, in)){
 			
+			if(!strcmp(argv[2], "lista")){
+				Lista* lista = cria_lista();
+			} else if(!strcmp(argv[2], "arvore")){
+				Arvore* arvore = cria_arvore();
+			}
+		
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
 
 			// ADICIONAR OS PRINTS NA POSIÇÃO posicao_na_lista!!!!!!!!
-			printf("linha %03d: '%s'\n", posicao_na_lista + 1, linha);
+			linhas[contador_linha] = linha;
 
 			// TO DO: usar esse while para guardar as linhas
-
+			
 			copia_ponteiro_linha = linha;
-
 			
 			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-")) ){
 
@@ -101,15 +106,16 @@ int main(int argc, char ** argv){
 					continue;
 				}
 
-				// usar esse print para guardar as palavras na lista de palavras;
-				printf("\t   '%s'\n", palavra);
+				if(!strcmp(argv[2], "lista")){
+					//insere(lista, palavra, contador_linha+1);
+				} else if(!strcmp(argv[2], "arvore")){
+					
+				}
+				
 			}
 
 			contador_linha++;
 		}
-
-			posicao_na_lista++;
-		}*/
 
 		//Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
@@ -119,22 +125,25 @@ int main(int argc, char ** argv){
 
 		//Busca
 		char comando[64];
+		char palavraBuscada[58];
 		char verifica[6] = "busca ";
 		int buscaCorreta;
-		char* palavraBuscada = (char*) malloc(sizeof(char) * 58);
-
-
 
 		while(1){
+			//Comeca com palavrabuscada nula
 			for (i = 0; i < 58; i++){
 				palavraBuscada[i] = '\0';
 			}
+
+			//Leitura da entrada
 			printf("> ");
 			fgets(comando, 64, stdin);
+
+			//Finalizar programa
 			if(!strcmp(comando, "fim\n")) return 0;
 
+			//Verifica se "busca " foi digitada
 			buscaCorreta = 1;
-
 			for(i = 0; i < 6; i++){
 				if(verifica[i] != comando[i]) {
 					buscaCorreta = 0;
@@ -146,10 +155,13 @@ int main(int argc, char ** argv){
 				continue;
 			}
 
+			//Verifica se foi inserido uma palavra
 			if(!isalpha(comando[6]) || !isalnum(comando[6])){
 				printf("Opcao invalida\n");
 				continue;
 			}
+
+			//Registra a palavra a ser buscado
 			for(i = 6; !(comando[i] == ' ' || comando[i] == '\0'); i++){
 			 	palavraBuscada[i-6] = comando[i];
 			}

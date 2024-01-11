@@ -33,8 +33,6 @@ int insere(Lista* lista, char* plvr, int lin){
 		p->qntd++;
 
 		Linha* aux = p->linha;
-
-		// 1 2 --> 6
 		while (aux->proximo){
 			if (aux->proximo->pos == lin){
 				free(result);
@@ -42,6 +40,7 @@ int insere(Lista* lista, char* plvr, int lin){
 			}
 			aux = aux->proximo;
 		}
+
 		aux->proximo = result;
 		return 0;
 	}

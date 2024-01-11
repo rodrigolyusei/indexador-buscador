@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+Arvore* cria_arvore(){
+	Arvore* arvore =  (Arvore*) malloc (sizeof(Arvore));
+	arvore->raiz = NULL;
+	
+	return arvore;
+}
+
 void addNo(Node** raiz, Node* nod) {
     if (*raiz== NULL) {
         *raiz = nod;
