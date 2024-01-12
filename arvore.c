@@ -27,33 +27,53 @@ NoA* buscaA(NoA* raiz, char* plvr) {
     }
 }
 
-int insereA(NoA* raiz, char* plvr) {
-    NoA* aux = (NoA*) malloc(sizeof(NoA));
+NoA* insereA(NoA* raiz, char* plvr, int lin) {
 
-    if (raiz == NULL) {
-        raiz = aux;
-    } else {
-        int i = strcmp(aux->palavra, (raiz)->palavra);
-        if ( i < 0) {
-            if ((raiz)->esquerda == NULL) {
-                (raiz)->esquerda = aux;
-            } else {
-                insereA((raiz)->esquerda, plvr);
-                //Refaz a função porém comparando com o elemento a esquerda 
-            }
-        }
-        if ( i > 0) {
-            if ((raiz)->direita == NULL) {
-                (raiz)->direita = aux;
-            } else {
-                insereA((raiz)->direita, plvr);
-            }
-        }else{ // quando as strings são iguais
-	        LinhaA* novaLinha = (LinhaA*)malloc(sizeof(LinhaA));
-            novaLinha->pos = aux->linha->pos;
-            novaLinha->proximo = (raiz)->linha;
-            (raiz)->linha = novaLinha;
-            (raiz)->qntd++;
-       }
+    LinhaA* linha = (LinhaA*) malloc(sizeof(LinhaA));
+    linha->pos = lin;
+    linha->proximo = NULL;
+
+
+    if (raiz == NULL){
+        NoA* aux = (NoA*) malloc(sizeof(NoA));
+        aux->linha = linha;
+        //aux->palavra = plvr;
+        aux->palavra = (char*) malloc(strlen(plvr) + 1);
+        strcpy(aux->palavra, plvr);
+        aux->esquerda = NULL;
+        aux->direita = NULL;
+
+        aux->qntd = 1;
+        return aux;
     }
+
+    int comp = strcmp(plvr, raiz->palavra);
+
+    if ( comp < 0) {
+            raiz->esquerda = insereA(raiz->esquerda, plvr, lin);
+    } else if (comp > 0){
+        raiz->direita = insereA(raiz->direita, plvr, lin);
+        //Refaz a função porém comparando com o elemento a esquerda 
+    } else { 
+
+        LinhaA* aux2 = raiz->linha;
+        raiz->qntd++;
+        
+        while (aux2->proximo != NULL){
+            if (aux2->proximo->pos == lin){
+                free(linha);
+                return raiz;
+            }
+            aux2 = aux2->proximo;
+        }
+
+        if (aux2->pos == lin){
+            free(linha);
+            return raiz;
+        }
+
+        aux2->proximo = linha;
+        
+    }
+    return raiz;
 }
