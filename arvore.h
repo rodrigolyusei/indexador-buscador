@@ -2,8 +2,10 @@
 #define ARVORE_H
 
 typedef struct _linha1_ {
+
    int pos;
    struct _linha1_* proximo;
+   
 }linha1;
 
 typedef struct Nod {
@@ -11,7 +13,7 @@ typedef struct Nod {
     char* palavra;
     struct Nod* esquerda;
     struct Nod* direita;
-    Linha1* linha1;
+    linha1* linha1;
     int qntd;
 
 } Node;

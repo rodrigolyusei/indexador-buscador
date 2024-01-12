@@ -11,12 +11,11 @@ Lista* cria_lista(){
 	return lista;
 }
 
-No* busca(Lista* lista, char* plvr){
-	No* p = lista->primeiro;
+NoL* busca(Lista* lista, char* plvr){
+	NoL* p = lista->primeiro;
 
 	while(p && strcasecmp(plvr, p->palavra) < 0 ){
 		p = p->proximo;
-        
 	}
 	if(p && strcasecmp(plvr, p->palavra) == 0 ) return p;
 
@@ -25,9 +24,9 @@ No* busca(Lista* lista, char* plvr){
 
 int insere(Lista* lista, char* plvr, int lin){
 	//Se a palavra ja existe, apenas incrementa qntd
-	No* p = busca(lista, plvr);
+	NoL* p = busca(lista, plvr);
 
-	Linha* result = (Linha*) malloc(sizeof(Linha));
+	LinhaL* result = (LinhaL*) malloc(sizeof(LinhaL));
 	result->pos = lin;
 	result->proximo = NULL;
 
@@ -35,7 +34,7 @@ int insere(Lista* lista, char* plvr, int lin){
 		p->qntd++;
 
 		// 2 --> 2
-		Linha* aux = p->linha;
+		LinhaL* aux = p->linha;
 		while (aux->proximo != NULL){
 			if (aux->proximo->pos == lin){
 				free(result);
@@ -54,13 +53,11 @@ int insere(Lista* lista, char* plvr, int lin){
 	}
 
 	//Aloca o novo no
-	No* anterior;
-	No* novo = (No*) malloc(sizeof(No));
-	
-	//novo->palavra = plvr;
+	NoL* anterior;
+	NoL* novo = (NoL*) malloc(sizeof(NoL));
+
 	novo->palavra = (char*)malloc(strlen(plvr) + 1);
 	strcpy(novo->palavra, plvr);
-
 	novo->linha = result;
 	novo->proximo = NULL;
 	anterior = NULL;
@@ -90,13 +87,13 @@ void imprime_lista(Lista* lista) {
         return;
     }
 
-    No* atual = lista->primeiro;
+    NoL* atual = lista->primeiro;
 
     while (atual != NULL) {
         printf("Palavra: %s\n", atual->palavra);
         printf("Quantidade de Ocorrencias: %d\n", atual->qntd);
 
-        Linha* linha_atual = atual->linha;
+        LinhaL* linha_atual = atual->linha;
         while (linha_atual != NULL) {
             printf("Posicao: %d\n", linha_atual->pos);
             linha_atual = linha_atual->proximo;
@@ -107,8 +104,9 @@ void imprime_lista(Lista* lista) {
         atual = atual->proximo;
     }
 }
-void imprime_linhas(Linha* primeira, char** linhas){
-	Linha* aux = primeira;
+
+void imprime_linhasL(LinhaL* primeira, char** linhas){
+	LinhaL* aux = primeira;
 	while(aux != NULL){
 		printf("%04d : %s\n", aux->pos, linhas[aux->pos-1]);
 		aux = aux->proximo;

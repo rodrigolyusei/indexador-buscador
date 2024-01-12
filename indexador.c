@@ -11,20 +11,22 @@
 
 int main(int argc, char ** argv){
 
-    clock_t start_time, end_time;
-    double cpu_time_used;
+	FILE* in;
 	Lista* lista;
 	Arvore* arvore;
-	FILE* in;
+    clock_t start_time, end_time;
+    double cpu_time_used;
 	char* linha;
 	char* copia_ponteiro_linha;
 	char* quebra_de_linha;
-	char* palavra;	
+	char* palavra;
+	char** linhas;
 	int i;
 	int contador_linha;
 	int tipo;
-	//Quando for passado apenas o arquivo do texto
-	//Exemplo: .\EP texto.txt
+
+	// Se for passado apenas o arquivo de texto
+	// Exemplo: .\EP data\texto.txt
 	if(argc == 2) {
 
 		in = fopen(argv[1], "r");
@@ -66,13 +68,13 @@ int main(int argc, char ** argv){
 		return 0;
 	}
 
-	//Quando for passado o arquivo do texto e o tipo da busca
-	//Exemplo: .\EP texto.txt lista
+	// Se for passado o arquivo de texto e o tipo da busca
+	// Exemplo: .\EP data\texto.txt lista
 	if(argc == 3){
-
+		// Comeca a contagem do tempo de execucao
 		start_time = clock();
-		in = fopen(argv[1], "r");
 
+		// Define o tipo de indexador a ser criado
 		tipo = 0;
 		if(strcmp(argv[2], "lista") == 0){
 				tipo = 1;
@@ -81,39 +83,35 @@ int main(int argc, char ** argv){
 		} else if(strcmp(argv[2], "arvore") == 0){
 				tipo = 2;
 				arvore = cria_arvore();
-			}
+		}
 
+		// Abre, armazena o arquivo de texto do parametro e conta as linhas
+		in = fopen(argv[1], "r");
 		contador_linha = 0;
- 		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
-
-		//Conta as linhas do arquivo e cria o array
+		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
 		while(in && fgets(linha, TAMANHO, in)){
 			contador_linha++;
 		}
 		fclose(in);
 
+		// Aloca o array das linhas e o string para linha
+		linhas = (char**) malloc(sizeof(char*) * contador_linha);
 
-		char** linhas = (char**) malloc(sizeof(char*) * contador_linha);
-
+		// Abre novamente o arquivo e realiza a indexacao
 		in = fopen(argv[1], "r");
 		contador_linha = 0;
-
-		//Cria a lista efetivamente
 		while(in && fgets(linha, TAMANHO, in)){
-
-		
+			// Substitui as quebras de linhas por nulo
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
 
-
-			// ADICIONAR OS PRINTS NA POSIÇÃO posicao_na_lista!!!!!!!!
+			// Salva cada linha no array das linhas
 			linhas[contador_linha] = strdup(linha);
 			
-			// TO DO: usar esse while para guardar as linhas
-			
+			// Para cada linha salva as palavras
 			copia_ponteiro_linha = linha;
-			
 			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-")) ){
 
+				// Elimina caracteres especiais
 				for (int i = 0; i < strlen(palavra); i++){
 					if (!isalpha(palavra[i])) palavra[i] = '\0';
 				}
@@ -121,8 +119,8 @@ int main(int argc, char ** argv){
 					continue;
 				}
 
+				// Insere de acordo com o tipo de indexacao escolhida
 				if(tipo == 1){
-					//printf("palavra:%s\n", palavra);
 					insere(lista, palavra, contador_linha+1);
 				} else if(tipo == 2){
 
@@ -132,38 +130,38 @@ int main(int argc, char ** argv){
 
 			contador_linha++;
 		}
+
+		// Termina a contagem do tempo de execucao
 		end_time = clock();
 		cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
-		//imprime_lista(lista);
-		//Apresentacao das informacoes
+
+		// Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
 		printf("Arquivo texto: '%s'\n", argv[1]);
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %05.0f ms\n", cpu_time_used);
 
-
-		//Busca
+		// Busca
 		char comando[64];
 		char palavraBuscada[58];
 		char verifica[6] = "busca ";
 		int buscaCorreta;
-		
-		No* info;
+		NoL* info;
 
 		while(1){
-			//Comeca com palavrabuscada nula
+			// Comeca com palavrabuscada anulada
 			for (i = 0; i < 58; i++){
 				palavraBuscada[i] = '\0';
 			}
 
-			//Leitura da entrada
+			// Leitura da entrada
 			printf("> ");
 			fgets(comando, 64, stdin);
 
-			//Finalizar programa
+			// Finalizar programa
 			if(!strcmp(comando, "fim\n")) return 0;
 
-			//Verifica se "busca " foi digitada
+			// Verifica se "busca " foi digitada
 			buscaCorreta = 1;
 			for(i = 0; i < 6; i++){
 				if(verifica[i] != comando[i]) {
@@ -176,27 +174,32 @@ int main(int argc, char ** argv){
 				continue;
 			}
 
-			//Verifica se foi inserido uma palavra
+			// Verifica se foi inserido uma palavra
 			if(!isalpha(comando[6]) || !isalnum(comando[6])){
 				printf("Opcao invalida!\n");
 				continue;
 			}
 
+			// Comeca a contagem para busca
 			start_time = clock();
-			//Registra a palavra a ser buscado
+
+			// Registra a palavra a ser buscado
 			for(i = 6; !(comando[i] == ' ' || comando[i] == '\0'); i++){
 			 	palavraBuscada[i-6] = comando[i];
 			}
-			//printf("%s", palavraBuscada);
+
+			// Busca a palavra na estrutura e imprime o resultado
 			palavraBuscada[strlen(palavraBuscada)-1] = '\0';
 			info = busca(lista, palavraBuscada);
 			if (info != NULL){
 				printf("Existem %i ocorrencias da palavra '%s' na(s) seguinte(s) linha(s):\n", info->qntd, palavraBuscada);
-				imprime_linhas(info->linha, linhas);
+				imprime_linhasL(info->linha, linhas);
 			}
 			else{
 				printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
 			}
+			
+			// Termina a contagem para busca e imprime
 			end_time = clock();
 			cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
 			printf("Tempo de busca: %05.0f ms\n", cpu_time_used);

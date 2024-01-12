@@ -1,31 +1,32 @@
 #ifndef LISTA_H
 #define LISTA_H
 
-typedef struct _linha_ {
+typedef struct _linhaL_ {
 	
 	int pos;
-	struct _linha_* proximo;
+	struct _linhaL_* proximo;
 
-} Linha;
+} LinhaL;
 
-typedef struct _no_ {
+typedef struct _noL_ {
 
 	char* palavra;
-    Linha* linha;
+    LinhaL* linha;
     int qntd;
-	struct _no_* proximo;
+	struct _noL_* proximo;
 
-} No;
+} NoL;
 
 typedef struct {
 	
-	No* primeiro;
+	NoL* primeiro;
 
 } Lista;
 
 Lista* cria_lista();
-No* busca(Lista* lista, char* plvr);
+NoL* busca(Lista* lista, char* plvr);
 int insere(Lista* lista, char* plvr, int lin);
 void imprime_lista(Lista* lista);
-void imprime_linhas(Linha* primeira, char** linhas);
+void imprime_linhasL(LinhaL* primeira, char** linhas);
+
 #endif
