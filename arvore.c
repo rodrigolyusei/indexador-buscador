@@ -15,7 +15,7 @@ void addNo(Node** raiz, Node* nod) {
         *raiz = nod;
     } else {
         int i = strcmp(nod->palavra, (*raiz)->palavra);
-        if ( i <= 0) {
+        if ( i < 0) {
             if ((*raiz)->esquerda == NULL) {
                 (*raiz)->esquerda = nod;
             } else {
@@ -28,7 +28,13 @@ void addNo(Node** raiz, Node* nod) {
             } else {
                 addNo(&((*raiz)->direita), nod);
             }
-        }        
+        }else{ // quando as strings são iguais
+	    linha1* novaLinha = (linha1*)malloc(sizeof(linha1));
+            novaLinha->pos = nod->linha1->pos;
+            novaLinha->proximo = (*raiz)->linha1;
+            (*raiz)->linha1 = novaLinha;
+            (*raiz)->qntd++;
+       }
     }
 }
 
