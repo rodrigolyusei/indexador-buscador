@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "lista.h"
 #include "arvore.h"
 #include "windows.h"
@@ -10,7 +11,8 @@
 
 int main(int argc, char ** argv){
 
-
+    clock_t start_time, end_time;
+    double cpu_time_used;
 	Lista* lista;
 	Arvore* arvore;
 	FILE* in;
@@ -68,6 +70,7 @@ int main(int argc, char ** argv){
 	//Exemplo: .\EP texto.txt lista
 	if(argc == 3){
 
+		start_time = clock();
 		in = fopen(argv[1], "r");
 
 		tipo = 0;
@@ -103,8 +106,8 @@ int main(int argc, char ** argv){
 
 
 			// ADICIONAR OS PRINTS NA POSIÇÃO posicao_na_lista!!!!!!!!
-			linhas[contador_linha] = linha;
-
+			linhas[contador_linha] = strdup(linha);
+			
 			// TO DO: usar esse while para guardar as linhas
 			
 			copia_ponteiro_linha = linha;
@@ -129,13 +132,14 @@ int main(int argc, char ** argv){
 
 			contador_linha++;
 		}
+		end_time = clock();
+		cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
 		imprime_lista(lista);
-
 		//Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
 		printf("Arquivo texto: '%s'\n", argv[1]);
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
-		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
+		printf("Tempo para carregar o arquivo e construir o indice: %05.0f ms\n", cpu_time_used);
 
 
 		//Busca
@@ -143,6 +147,8 @@ int main(int argc, char ** argv){
 		char palavraBuscada[58];
 		char verifica[6] = "busca ";
 		int buscaCorreta;
+		
+		No* info;
 
 		while(1){
 			//Comeca com palavrabuscada nula
@@ -176,12 +182,24 @@ int main(int argc, char ** argv){
 				continue;
 			}
 
+			start_time = clock();
 			//Registra a palavra a ser buscado
 			for(i = 6; !(comando[i] == ' ' || comando[i] == '\0'); i++){
 			 	palavraBuscada[i-6] = comando[i];
 			}
-			printf("%s", palavraBuscada);
-
+			//printf("%s", palavraBuscada);
+			palavraBuscada[strlen(palavraBuscada)-1] = '\0';
+			info = busca(lista, palavraBuscada);
+			if (info != NULL){
+				printf("Existem %i ocorrencias da palavra '%s' na(s) seguinte(s) linha(s):\n", info->qntd, palavraBuscada);
+				imprime_linhas(info->linha, linhas);
+			}
+			else{
+				printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
+			}
+			end_time = clock();
+			cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
+			printf("Tempo de execucao: %.5f ms\n", cpu_time_used);
 		}
 
 		return 0;

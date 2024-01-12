@@ -64,6 +64,7 @@ int insere(Lista* lista, char* plvr, int lin){
 	//de acordo com a ordem alfabetica (ASCII)
 	while(p){
 		if(p != NULL & strcasecmp(plvr, p->palavra) > 0 ) break;
+ 		
 		anterior = p;
 		p = p->proximo;
 	}
@@ -99,4 +100,11 @@ void imprime_lista(Lista* lista) {
 
         atual = atual->proximo;
     }
+}
+void imprime_linhas(Linha* primeira, char** linhas){
+	Linha* aux = primeira;
+	while(aux != NULL){
+		printf("%04d : %s\n", aux->pos, linhas[aux->pos-1]);
+		aux = aux->proximo;
+	}
 }
