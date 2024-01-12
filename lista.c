@@ -34,6 +34,7 @@ int insere(Lista* lista, char* plvr, int lin){
 	if(p != NULL) {
 		p->qntd++;
 
+		// 2 --> 2
 		Linha* aux = p->linha;
 		while (aux->proximo != NULL){
 			if (aux->proximo->pos == lin){
@@ -41,6 +42,11 @@ int insere(Lista* lista, char* plvr, int lin){
 				return 0;
 			}
 			aux = aux->proximo;
+		}
+
+		if (aux->pos == lin){
+			free(result);
+			return 0;
 		}
 
 		aux->proximo = result;
@@ -63,7 +69,7 @@ int insere(Lista* lista, char* plvr, int lin){
 	//Percorre a lista ate chegar na posicao certa
 	//de acordo com a ordem alfabetica (ASCII)
 	while(p){
-		if(p != NULL & strcasecmp(plvr, p->palavra) > 0 ) break;
+		if(p != NULL && strcasecmp(plvr, p->palavra) > 0 ) break;
  		
 		anterior = p;
 		p = p->proximo;

@@ -122,7 +122,7 @@ int main(int argc, char ** argv){
 				}
 
 				if(tipo == 1){
-					printf("palavra:%s\n", palavra);
+					//printf("palavra:%s\n", palavra);
 					insere(lista, palavra, contador_linha+1);
 				} else if(tipo == 2){
 
@@ -134,7 +134,7 @@ int main(int argc, char ** argv){
 		}
 		end_time = clock();
 		cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
-		imprime_lista(lista);
+		//imprime_lista(lista);
 		//Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
 		printf("Arquivo texto: '%s'\n", argv[1]);
@@ -172,13 +172,13 @@ int main(int argc, char ** argv){
 				}
 			}
 			if (!buscaCorreta){
-				printf("Opcao invalida!!\n");
+				printf("Opcao invalida!\n");
 				continue;
 			}
 
 			//Verifica se foi inserido uma palavra
 			if(!isalpha(comando[6]) || !isalnum(comando[6])){
-				printf("Opcao invalida\n");
+				printf("Opcao invalida!\n");
 				continue;
 			}
 
@@ -199,7 +199,7 @@ int main(int argc, char ** argv){
 			}
 			end_time = clock();
 			cpu_time_used = ((double)(end_time - start_time)) * 1000.0 / CLOCKS_PER_SEC;
-			printf("Tempo de execucao: %.5f ms\n", cpu_time_used);
+			printf("Tempo de busca: %05.0f ms\n", cpu_time_used);
 		}
 
 		return 0;
