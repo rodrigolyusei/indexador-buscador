@@ -1,31 +1,33 @@
 #ifndef ARVORE_H
 #define ARVORE_H
 
-typedef struct _linha1_ {
+typedef struct _linhaA_ {
 
-   int pos;
-   struct _linha1_* proximo;
-   
-}linha1;
+    int pos;
+    struct _linhaA_* proximo;
 
-typedef struct Nod {
+} LinhaA;
+
+typedef struct _noA_ {
 
     char* palavra;
-    struct Nod* esquerda;
-    struct Nod* direita;
-    linha1* linha1;
+    LinhaA* linha;
     int qntd;
+    struct _noA_* esquerda;
+    struct _noA_* direita;
 
-} Node;
+} NoA;
 
 typedef struct _arvore_ {
-
-    Node* raiz;
+    
+    NoA* raiz;
 
 } Arvore;
 
 Arvore* cria_arvore();
-void addNo(Node** raiz, Node* no);
-Node* Busca(Node* raiz, const char* plvr);
+NoA* buscaA(NoA* raiz, char* plvr);
+int insereA(NoA* raiz, char* plvr);
+//void imprime_arvore(Arvore* arvore);
+//void imprime_linhasA(LinhaA* primeira, char** linhas);
 
 #endif

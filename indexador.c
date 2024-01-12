@@ -80,7 +80,7 @@ int main(int argc, char ** argv){
 				tipo = 1;
 				lista = cria_lista();
 				
-		} else if(strcmp(argv[2], "arvore") == 0){
+		}else if(strcmp(argv[2], "arvore") == 0){
 				tipo = 2;
 				arvore = cria_arvore();
 		}
@@ -110,24 +110,21 @@ int main(int argc, char ** argv){
 			// Para cada linha salva as palavras
 			copia_ponteiro_linha = linha;
 			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-")) ){
-
 				// Elimina caracteres especiais
-				for (int i = 0; i < strlen(palavra); i++){
+				for(int i = 0; i < strlen(palavra); i++){
 					if (!isalpha(palavra[i])) palavra[i] = '\0';
 				}
-				if ((*palavra == '\0')) {
+				if((*palavra == '\0')) {
 					continue;
 				}
 
 				// Insere de acordo com o tipo de indexacao escolhida
 				if(tipo == 1){
-					insere(lista, palavra, contador_linha+1);
-				} else if(tipo == 2){
+					insereL(lista, palavra, contador_linha+1);
+				}else if(tipo == 2){
 
 				}
-				
 			}
-
 			contador_linha++;
 		}
 
@@ -146,11 +143,12 @@ int main(int argc, char ** argv){
 		char palavraBuscada[58];
 		char verifica[6] = "busca ";
 		int buscaCorreta;
-		NoL* info;
+		NoL* auxL;
+		//NoA* auxA;
 
 		while(1){
 			// Comeca com palavrabuscada anulada
-			for (i = 0; i < 58; i++){
+			for(i = 0; i < 58; i++){
 				palavraBuscada[i] = '\0';
 			}
 
@@ -169,7 +167,7 @@ int main(int argc, char ** argv){
 					break;
 				}
 			}
-			if (!buscaCorreta){
+			if(!buscaCorreta){
 				printf("Opcao invalida!\n");
 				continue;
 			}
@@ -187,16 +185,20 @@ int main(int argc, char ** argv){
 			for(i = 6; !(comando[i] == ' ' || comando[i] == '\0'); i++){
 			 	palavraBuscada[i-6] = comando[i];
 			}
+			palavraBuscada[strlen(palavraBuscada)-1] = '\0';
 
 			// Busca a palavra na estrutura e imprime o resultado
-			palavraBuscada[strlen(palavraBuscada)-1] = '\0';
-			info = busca(lista, palavraBuscada);
-			if (info != NULL){
-				printf("Existem %i ocorrencias da palavra '%s' na(s) seguinte(s) linha(s):\n", info->qntd, palavraBuscada);
-				imprime_linhasL(info->linha, linhas);
-			}
-			else{
-				printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
+			if(tipo == 1){
+				auxL = buscaL(lista, palavraBuscada);
+				if(auxL){
+					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxL->qntd, palavraBuscada);
+					imprime_linhasL(auxL->linha, linhas);
+				}
+				else{
+					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
+				}
+			}else if(tipo == 2){
+
 			}
 			
 			// Termina a contagem para busca e imprime

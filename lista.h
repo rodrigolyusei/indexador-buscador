@@ -17,15 +17,15 @@ typedef struct _noL_ {
 
 } NoL;
 
-typedef struct {
+typedef struct _lista_ {
 	
 	NoL* primeiro;
 
 } Lista;
 
 Lista* cria_lista();
-NoL* busca(Lista* lista, char* plvr);
-int insere(Lista* lista, char* plvr, int lin);
+NoL* buscaL(Lista* lista, char* plvr);
+int insereL(Lista* lista, char* plvr, int lin);
 void imprime_lista(Lista* lista);
 void imprime_linhasL(LinhaL* primeira, char** linhas);
 

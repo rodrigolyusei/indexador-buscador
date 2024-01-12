@@ -11,7 +11,7 @@ Lista* cria_lista(){
 	return lista;
 }
 
-NoL* busca(Lista* lista, char* plvr){
+NoL* buscaL(Lista* lista, char* plvr){
 	NoL* p = lista->primeiro;
 
 	while(p && strcasecmp(plvr, p->palavra) < 0 ){
@@ -22,9 +22,9 @@ NoL* busca(Lista* lista, char* plvr){
 	return NULL;
 }
 
-int insere(Lista* lista, char* plvr, int lin){
+int insereL(Lista* lista, char* plvr, int lin){
 	//Se a palavra ja existe, apenas incrementa qntd
-	NoL* p = busca(lista, plvr);
+	NoL* p = buscaL(lista, plvr);
 
 	LinhaL* result = (LinhaL*) malloc(sizeof(LinhaL));
 	result->pos = lin;
@@ -56,7 +56,7 @@ int insere(Lista* lista, char* plvr, int lin){
 	NoL* anterior;
 	NoL* novo = (NoL*) malloc(sizeof(NoL));
 
-	novo->palavra = (char*)malloc(strlen(plvr) + 1);
+	novo->palavra = (char*) malloc(strlen(plvr) + 1);
 	strcpy(novo->palavra, plvr);
 	novo->linha = result;
 	novo->proximo = NULL;
@@ -77,8 +77,6 @@ int insere(Lista* lista, char* plvr, int lin){
 	if(anterior) anterior->proximo = novo;
 	else lista->primeiro = novo;
 	novo->qntd++;
-
-    return 0;
 }
 
 void imprime_lista(Lista* lista) {
@@ -108,7 +106,7 @@ void imprime_lista(Lista* lista) {
 void imprime_linhasL(LinhaL* primeira, char** linhas){
 	LinhaL* aux = primeira;
 	while(aux != NULL){
-		printf("%04d : %s\n", aux->pos, linhas[aux->pos-1]);
+		printf("%05d: %s\n", aux->pos, linhas[aux->pos-1]);
 		aux = aux->proximo;
 	}
 }
