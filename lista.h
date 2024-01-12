@@ -26,5 +26,5 @@ typedef struct {
 Lista* cria_lista();
 No* busca(Lista* lista, char* plvr);
 int insere(Lista* lista, char* plvr, int lin);
-
+void imprime_lista(Lista* lista);
 #endif

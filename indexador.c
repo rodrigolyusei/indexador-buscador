@@ -10,6 +10,9 @@
 
 int main(int argc, char ** argv){
 
+
+	Lista* lista;
+	Arvore* arvore;
 	FILE* in;
 	char* linha;
 	char* copia_ponteiro_linha;
@@ -17,7 +20,7 @@ int main(int argc, char ** argv){
 	char* palavra;	
 	int i;
 	int contador_linha;
-
+	int tipo;
 	//Quando for passado apenas o arquivo do texto
 	//Exemplo: .\EP texto.txt
 	if(argc == 2) {
@@ -67,6 +70,16 @@ int main(int argc, char ** argv){
 
 		in = fopen(argv[1], "r");
 
+		tipo = 0;
+		if(strcmp(argv[2], "lista") == 0){
+				tipo = 1;
+				lista = cria_lista();
+				
+		} else if(strcmp(argv[2], "arvore") == 0){
+				tipo = 2;
+				arvore = cria_arvore();
+			}
+
 		contador_linha = 0;
  		linha = (char *) malloc((TAMANHO + 1) * sizeof(char));
 
@@ -74,21 +87,20 @@ int main(int argc, char ** argv){
 		while(in && fgets(linha, TAMANHO, in)){
 			contador_linha++;
 		}
+		fclose(in);
+
 
 		char** linhas = (char**) malloc(sizeof(char*) * contador_linha);
 
+		in = fopen(argv[1], "r");
 		contador_linha = 0;
 
 		//Cria a lista efetivamente
 		while(in && fgets(linha, TAMANHO, in)){
-			
-			if(!strcmp(argv[2], "lista")){
-				Lista* lista = cria_lista();
-			} else if(!strcmp(argv[2], "arvore")){
-				Arvore* arvore = cria_arvore();
-			}
+
 		
 			if( (quebra_de_linha = strrchr(linha, '\n')) ) *quebra_de_linha = 0;
+
 
 			// ADICIONAR OS PRINTS NA POSIÇÃO posicao_na_lista!!!!!!!!
 			linhas[contador_linha] = linha;
@@ -106,22 +118,25 @@ int main(int argc, char ** argv){
 					continue;
 				}
 
-				if(!strcmp(argv[2], "lista")){
-					//insere(lista, palavra, contador_linha+1);
-				} else if(!strcmp(argv[2], "arvore")){
-					
+				if(tipo == 1){
+					printf("palavra:%s\n", palavra);
+					insere(lista, palavra, contador_linha+1);
+				} else if(tipo == 2){
+
 				}
 				
 			}
 
 			contador_linha++;
 		}
+		imprime_lista(lista);
 
 		//Apresentacao das informacoes
 		printf("Tipo de indice: '%s'\n", argv[2]);
 		printf("Arquivo texto: '%s'\n", argv[1]);
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %5i\n", contador_linha);
+
 
 		//Busca
 		char comando[64];
