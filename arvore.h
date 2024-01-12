@@ -1,12 +1,17 @@
 #ifndef ARVORE_H
 #define ARVORE_H
 
+typedef struct _linha1_ {
+   int pos;
+   struct _linha_* proximo;
+}linha1;
 typedef struct Nod {
 
     char* palavra;
     struct Nod* esquerda;
     struct Nod* direita;
-    int linha;
+    Linha1* linha1;
+    int qntd;
 
 } Node;
 
