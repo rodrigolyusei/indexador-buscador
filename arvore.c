@@ -15,7 +15,7 @@ void addNo(Node** raiz, Node* nod) {
         *raiz = nod;
     } else {
         int i = strcmp(nod->palavra, (*raiz)->palavra);
-        if ( i <= 0) {
+        if ( i < 0) {
             if ((*raiz)->esquerda == NULL) {
                 (*raiz)->esquerda = nod;
             } else {
@@ -28,7 +28,11 @@ void addNo(Node** raiz, Node* nod) {
             } else {
                 addNo(&((*raiz)->direita), nod);
             }
-        }        
+        }else{ // quando as strings são iguais
+	       (*raiz)->linha->proximo= nod->linha;
+	       (*raiz)->qnt++;
+	       (*raiz)->linha->proximo.pos++;
+       }
     }
 }
 
