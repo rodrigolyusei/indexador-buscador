@@ -29,9 +29,11 @@ void addNo(Node** raiz, Node* nod) {
                 addNo(&((*raiz)->direita), nod);
             }
         }else{ // quando as strings são iguais
-	       (*raiz)->linha->proximo= nod->linha;
-	       (*raiz)->qnt++;
-	       (*raiz)->linha->proximo.pos++;
+	    linha1* novaLinha = (linha1*)malloc(sizeof(linha1));
+            novaLinha->pos = nod->linha1->pos;
+            novaLinha->proximo = (*raiz)->linha1;
+            (*raiz)->linha1 = novaLinha;
+            (*raiz)->qntd++;
        }
     }
 }
