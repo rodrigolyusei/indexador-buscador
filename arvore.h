@@ -3,7 +3,7 @@
 
 typedef struct _linha1_ {
    int pos;
-   struct _linha_* proximo;
+   struct _linha1_* proximo;
 }linha1;
 typedef struct Nod {
 
