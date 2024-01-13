@@ -29,6 +29,6 @@ NoA* buscaA(NoA* raiz, char* plvr);
 NoA* insereA(NoA* raiz, char* plvr, int lin);
 void imprime_arvore(Arvore* arvore);
 void imprime_arvore_rec(NoA* no);
-//void imprime_linhasA(LinhaA* primeira, char** linhas);
+void imprime_linhasA(LinhaA* primeira, char** linhas);
 
 #endif

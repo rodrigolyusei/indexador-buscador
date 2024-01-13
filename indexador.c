@@ -162,7 +162,7 @@ int main(int argc, char ** argv){
 
 		// Para caso de teste e verificacao
 		// imprime_lista(lista);
-		// imprime_arvore(arvore);
+		 imprime_arvore(arvore);
 
 		// Busca
 		char comando[64];
@@ -227,7 +227,7 @@ int main(int argc, char ** argv){
 				auxA = buscaA(arvore->raiz, palavraBuscada);
 				if(auxA){
 					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxA->qntd, palavraBuscada);
-					//imprime_linhasA(auxL->linha, linhas);
+					imprime_linhasA(auxA->linha, linhas);
 				}
 				else{
 					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);

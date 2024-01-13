@@ -50,7 +50,7 @@ NoA* insereA(NoA* raiz, char* plvr, int lin) {
     }
 
     // Se a raiz existe compara com a palavra inserida
-    int comp = strcmp(plvr, raiz->palavra);
+    int comp = strcasecmp(plvr, raiz->palavra);
     if ( comp < 0) {
         // Se a palavra inserida vem antes da raiz insere a esquerda 
         raiz->esquerda = insereA(raiz->esquerda, plvr, lin);
@@ -106,4 +106,12 @@ void imprime_arvore(Arvore* arvore) {
     }
 
     imprime_arvore_rec(arvore->raiz);
+}
+
+void imprime_linhasA(LinhaA* primeira, char** linhas){
+	LinhaA* aux = primeira;
+	while(aux){
+		printf("%05d: %s\n", aux->pos, linhas[aux->pos-1]);
+		aux = aux->proximo;
+	}
 }
