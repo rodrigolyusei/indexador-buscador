@@ -27,7 +27,7 @@ int main(int argc, char ** argv){
 
 	// Se for passado apenas o arquivo de texto
 	// Exemplo: .\EP data\texto.txt
-	if(argc == 2) {
+	if(argc == 2){
 
 		in = fopen(argv[1], "r");
 
@@ -60,7 +60,7 @@ int main(int argc, char ** argv){
 				for(int i = 0; i < strlen(palavra); i++){
 					if (!isalpha(palavra[i])) palavra[i] = '\0';
 				}
-				if((*palavra == '\0')) {
+				if((*palavra == '\0')){
 					continue;
 				}
 
@@ -119,9 +119,9 @@ int main(int argc, char ** argv){
 			while( (palavra = strsep(&copia_ponteiro_linha, " ,.-/")) ){
 				// Elimina caracteres especiais
 				for(int i = 0; i < strlen(palavra); i++){
-					if (!isalpha(palavra[i])) palavra[i] = '\0';
+					if(!isalpha(palavra[i])) palavra[i] = '\0';
 				}
-				if((*palavra == '\0')) {
+				if((*palavra == '\0')){
 					continue;
 				}
 
@@ -129,7 +129,22 @@ int main(int argc, char ** argv){
 				if(tipo == 1){
 					insereL(lista, palavra, contador_linha+1);
 				}else if(tipo == 2){
+					if(arvore->raiz == NULL){
+						LinhaA* novalin = (LinhaA*) malloc(sizeof(LinhaA));
+						novalin->pos = contador_linha+1;
+						novalin->proximo = NULL;
+						NoA* novono = (NoA*) malloc(sizeof(NoA));
+						novono->palavra = (char*) malloc(strlen(palavra) + 1);
+						strcpy(novono->palavra, palavra);
+						novono->linha = novalin;
+						novono->esquerda = NULL;
+						novono->direita = NULL;
+						novono->qntd = 1;
 
+						arvore->raiz = novono;
+					}else{
+						insereA(arvore->raiz, palavra, contador_linha+1);
+					}
 				}
 			}
 			contador_linha++;
@@ -145,13 +160,17 @@ int main(int argc, char ** argv){
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %05.0f ms\n", cpu_time_used);
 
+		// Para caso de teste e verificacao
+		// imprime_lista(lista);
+		// imprime_arvore(arvore);
+
 		// Busca
 		char comando[64];
 		char palavraBuscada[58];
 		char verifica[6] = "busca ";
 		int buscaCorreta;
 		NoL* auxL;
-		//NoA* auxA;
+		NoA* auxA;
 
 		while(1){
 			// Comeca com palavrabuscada anulada
@@ -169,7 +188,7 @@ int main(int argc, char ** argv){
 			// Verifica se "busca " foi digitada
 			buscaCorreta = 1;
 			for(i = 0; i < 6; i++){
-				if(verifica[i] != comando[i]) {
+				if(verifica[i] != comando[i]){
 					buscaCorreta = 0;
 					break;
 				}
@@ -205,7 +224,14 @@ int main(int argc, char ** argv){
 					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
 				}
 			}else if(tipo == 2){
-
+				auxA = buscaA(arvore->raiz, palavraBuscada);
+				if(auxA){
+					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxA->qntd, palavraBuscada);
+					//imprime_linhasA(auxL->linha, linhas);
+				}
+				else{
+					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
+				}
 			}
 			
 			// Termina a contagem para busca e imprime
@@ -216,6 +242,5 @@ int main(int argc, char ** argv){
 
 		return 0;
 	}
-
 	return 1;
 }

@@ -14,57 +14,58 @@ Lista* cria_lista(){
 NoL* buscaL(Lista* lista, char* plvr){
 	NoL* p = lista->primeiro;
 
+	// Percorre a lista ate a palavra buscada ficar depois alfabeticamente
 	while(p && strcasecmp(plvr, p->palavra) < 0 ){
 		p = p->proximo;
 	}
+	// Se a palavra buscada for igual a do no
 	if(p && strcasecmp(plvr, p->palavra) == 0 ) return p;
 
 	return NULL;
 }
 
 int insereL(Lista* lista, char* plvr, int lin){
-	//Se a palavra ja existe, apenas incrementa qntd
+	// Aloca uma nova linha
+	LinhaL* novalin = (LinhaL*) malloc(sizeof(LinhaL));
+	novalin->pos = lin;
+	novalin->proximo = NULL;
+
+	// Se a palavra ja existe, apenas incrementa qntd
 	NoL* p = buscaL(lista, plvr);
-
-	LinhaL* result = (LinhaL*) malloc(sizeof(LinhaL));
-	result->pos = lin;
-	result->proximo = NULL;
-
-	if(p != NULL) {
+	if(p){
 		p->qntd++;
 
-		// 2 --> 2
 		LinhaL* aux = p->linha;
 		while (aux->proximo != NULL){
-			if (aux->proximo->pos == lin){
-				free(result);
+			if(aux->proximo->pos == lin){
+				free(novalin);
 				return 0;
 			}
 			aux = aux->proximo;
 		}
 
-		if (aux->pos == lin){
-			free(result);
+		if(aux->pos == lin){
+			free(novalin);
 			return 0;
 		}
 
-		aux->proximo = result;
+		aux->proximo = novalin;
 		return 0;
 	}
 
-	//Aloca o novo no
+	// Aloca o novo no
 	NoL* anterior;
-	NoL* novo = (NoL*) malloc(sizeof(NoL));
+	NoL* novono = (NoL*) malloc(sizeof(NoL));
 
-	novo->palavra = (char*) malloc(strlen(plvr) + 1);
-	strcpy(novo->palavra, plvr);
-	novo->linha = result;
-	novo->proximo = NULL;
+	novono->palavra = (char*) malloc(strlen(plvr) + 1);
+	strcpy(novono->palavra, plvr);
+	novono->linha = novalin;
+	novono->proximo = NULL;
+	novono->qntd = 1;
 	anterior = NULL;
 	p = lista->primeiro;
 
-	//Percorre a lista ate chegar na posicao certa
-	//de acordo com a ordem alfabetica (ASCII)
+	// Percorre a lista ate chegar na posicao certa pela ordem alfabetica
 	while(p){
 		if(p != NULL && strcasecmp(plvr, p->palavra) > 0 ) break;
  		
@@ -72,15 +73,16 @@ int insereL(Lista* lista, char* plvr, int lin){
 		p = p->proximo;
 	}
 	
-	//Insere o novo no na lista
-	novo->proximo = p;
-	if(anterior) anterior->proximo = novo;
-	else lista->primeiro = novo;
-	novo->qntd++;
+	// Insere o novo no na lista
+	novono->proximo = p;
+	if(anterior) anterior->proximo = novono;
+	else lista->primeiro = novono;
+
+	return 0;
 }
 
 void imprime_lista(Lista* lista) {
-    if (lista == NULL || lista->primeiro == NULL) {
+    if(lista == NULL || lista->primeiro == NULL){
         printf("Lista vazia\n");
         return;
     }
@@ -105,7 +107,7 @@ void imprime_lista(Lista* lista) {
 
 void imprime_linhasL(LinhaL* primeira, char** linhas){
 	LinhaL* aux = primeira;
-	while(aux != NULL){
+	while(aux){
 		printf("%05d: %s\n", aux->pos, linhas[aux->pos-1]);
 		aux = aux->proximo;
 	}
