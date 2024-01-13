@@ -162,7 +162,7 @@ int main(int argc, char ** argv){
 
 		// Para caso de teste e verificacao
 		// imprime_lista(lista);
-		 imprime_arvore(arvore);
+		// imprime_arvore(arvore);
 
 		// Busca
 		char comando[64];
