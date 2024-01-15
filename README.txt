@@ -1,15 +1,15 @@
 ## Instruções para execução
 
--Para compilar, use os comandos:
+Para compilar, use os comandos:
 gcc -c indexador.c -o indexador.o
 gcc -c arvore.c -o arvore.o
 gcc -c lista.c -o lista.o
 gcc indexador.o arvore.o lista.o -o executavel
 
--Para executar, use um dos três comandos:
-.\executavel.exe data/teste.txt
-.\executavel.exe data/teste.txt lista
-.\executavel.exe data/teste.txt arvore
+Para executar, use um dos três comandos:
+./executavel.exe data/teste.txt
+./executavel.exe data/teste.txt lista
+./executavel.exe data/teste.txt arvore
 
 Os arquivos de texto podem ser adicionados na pasta "data".
 Para usar no programa basta substituir o trecho "teste" pelo nome do arquivo.
