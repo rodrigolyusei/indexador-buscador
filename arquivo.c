@@ -18,7 +18,7 @@ void removerAcentos(wchar_t *str) {
 
 int main() {
     setlocale(LC_ALL, "Portuguese");  // Configuração da localidade para suporte a caracteres especiais
-    wchar_t palavra[] = L"árvóres";
+    wchar_t palavra[] = L"áàâãéèêíìîóòôõúùûç";
 
     wprintf(L"Palavra original: %ls\n", palavra);
 

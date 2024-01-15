@@ -12,6 +12,7 @@ typedef struct _noA_ {
 
     char* palavra;
     LinhaA* linha;
+    int altura;
     int qntd;
     struct _noA_* esquerda;
     struct _noA_* direita;
@@ -30,5 +31,7 @@ NoA* insereA(NoA* raiz, char* plvr, int lin);
 void imprime_arvore(Arvore* arvore);
 void imprime_arvore_rec(NoA* no);
 void imprime_linhasA(LinhaA* primeira, char** linhas);
+void insereArvoreAVL(NoA* arvore, char* plvr, int lin);
+
 
 #endif

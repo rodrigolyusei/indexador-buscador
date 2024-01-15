@@ -156,7 +156,7 @@ int main(int argc, char ** argv){
 
 						arvore->raiz = novono;
 					}else{
-						insereA(arvore->raiz, palavra, contador_linha+1);
+						insereArvoreAVL(arvore->raiz, palavra, contador_linha+1);
 					}
 				}
 			}
@@ -232,6 +232,7 @@ int main(int argc, char ** argv){
 				if(auxL){
 					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxL->qntd, palavraBuscada);
 					imprime_linhasL(auxL->linha, linhas);
+					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxL->qntd, palavraBuscada);
 				}
 				else{
 					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
@@ -241,6 +242,7 @@ int main(int argc, char ** argv){
 				if(auxA){
 					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxA->qntd, palavraBuscada);
 					imprime_linhasA(auxA->linha, linhas);
+					printf("Existe(m) %i ocorrencia(s) da palavra '%s' na(s) seguinte(s) linha(s):\n", auxA->qntd, palavraBuscada);
 				}
 				else{
 					printf("Palavra '%s' nao encontrada.\n", palavraBuscada);
