@@ -30,7 +30,7 @@ NoA* buscaA(NoA* raiz, char* plvr) {
     }
 }
 
-NoA* insereA(NoA* raiz, char* plvr, int lin) {
+NoA* insereA_rec(NoA* raiz, char* plvr, int lin) {
     // Aloca uma nova linha
     LinhaA* novalin = (LinhaA*) malloc(sizeof(LinhaA));
     novalin->pos = lin;
@@ -53,10 +53,10 @@ NoA* insereA(NoA* raiz, char* plvr, int lin) {
     int comp = strcasecmp(plvr, raiz->palavra);
     if ( comp < 0) {
         // Se a palavra inserida vem antes da raiz insere a esquerda 
-        raiz->esquerda = insereA(raiz->esquerda, plvr, lin);
+        raiz->esquerda = insereA_rec(raiz->esquerda, plvr, lin);
     } else if (comp > 0){
         // Se a palavra inserida vem depois da raiz insere a direita
-        raiz->direita = insereA(raiz->direita, plvr, lin);
+        raiz->direita = insereA_rec(raiz->direita, plvr, lin);
     } else {
         // Se a palavra inserida for igual da raiz, apenas incrementa
         LinhaA* aux2 = raiz->linha;
@@ -79,6 +79,27 @@ NoA* insereA(NoA* raiz, char* plvr, int lin) {
         
     }
     return raiz;
+}
+
+int insereA(Arvore* arvore, char* plvr, int lin){
+    if(arvore->raiz == NULL){
+        LinhaA* novalin = (LinhaA*) malloc(sizeof(LinhaA));
+        novalin->pos = lin;
+        novalin->proximo = NULL;
+        NoA* novono = (NoA*) malloc(sizeof(NoA));
+        novono->palavra = (char*) malloc(strlen(plvr) + 1);
+        strcpy(novono->palavra, plvr);
+        novono->linha = novalin;
+        novono->esquerda = NULL;
+        novono->direita = NULL;
+        novono->qntd = 1;
+
+        arvore->raiz = novono;
+    }else{
+        insereA_rec(arvore->raiz, plvr, lin);
+    }
+
+    return 0;
 }
 
 void imprime_arvore_rec(NoA* no) {

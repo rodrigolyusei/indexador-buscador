@@ -142,22 +142,7 @@ int main(int argc, char ** argv){
 				if(tipo == 1){
 					insereL(lista, palavra, contador_linha+1);
 				}else if(tipo == 2){
-					if(arvore->raiz == NULL){
-						LinhaA* novalin = (LinhaA*) malloc(sizeof(LinhaA));
-						novalin->pos = contador_linha+1;
-						novalin->proximo = NULL;
-						NoA* novono = (NoA*) malloc(sizeof(NoA));
-						novono->palavra = (char*) malloc(strlen(palavra) + 1);
-						strcpy(novono->palavra, palavra);
-						novono->linha = novalin;
-						novono->esquerda = NULL;
-						novono->direita = NULL;
-						novono->qntd = 1;
-
-						arvore->raiz = novono;
-					}else{
-						insereA(arvore->raiz, palavra, contador_linha+1);
-					}
+					insereA(arvore, palavra, contador_linha+1);
 				}
 			}
 			contador_linha++;
