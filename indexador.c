@@ -1,16 +1,3 @@
-/*********************************************************************/
-/**   ACH2023 - Algoritmo e Estrutura de Dados I                    **/
-/**   EACH-USP - Segundo Semestre de 2023                           **/
-/**   Turma 94 - Prof. Flavio Luiz Coutinho                         **/
-/**                                                                 **/
-/**   Exercicio Programa                                            **/
-/**                                                                 **/
-/**   Dimitri Prado                                                 **/
-/**   Kevin Tamayose                                                **/
-/**   Rodrigo Lyusei Suguimoto                                      **/
-/**                                                                 **/
-/*********************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
