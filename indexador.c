@@ -26,7 +26,7 @@ int main(int argc, char ** argv){
 	int tipo;
 
 	// Se for passado apenas o arquivo de texto
-	// Exemplo: .\EP data\texto.txt
+	// Exemplo: .\executavel data\texto.txt
 	if(argc == 2){
 
 		in = fopen(argv[1], "r");
@@ -76,7 +76,7 @@ int main(int argc, char ** argv){
 	}
 
 	// Se for passado o arquivo de texto e o tipo da busca
-	// Exemplo: .\EP data\texto.txt lista
+	// Exemplo: .\executavel data\texto.txt lista
 	if(argc == 3){
 		// Comeca a contagem do tempo de execucao
 		start_time = clock();
@@ -144,10 +144,6 @@ int main(int argc, char ** argv){
 		printf("Arquivo texto: '%s'\n", argv[1]);
 		printf("Numero de linhas no arquivo: %i\n", contador_linha);
 		printf("Tempo para carregar o arquivo e construir o indice: %05.0f ms\n", cpu_time_used);
-
-		// Para caso de teste e verificacao
-		// imprime_lista(lista);
-		// imprime_arvore(arvore);
 
 		// Busca
 		char comando[64];
