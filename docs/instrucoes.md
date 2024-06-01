@@ -1,31 +1,18 @@
-## Instruções para execução
+## Compilação no VSCode
 
-Para compilar, use os comandos:
-gcc -c indexador.c -o indexador.o
-gcc -c arvore.c -o arvore.o
-gcc -c lista.c -o lista.o
-gcc indexador.o arvore.o lista.o -o executavel
+Caso tenha problemas para compilar, primeiro verifique:
 
-Para executar, use um dos três comandos:
-./executavel.exe data/teste.txt
-./executavel.exe data/teste.txt lista
-./executavel.exe data/teste.txt arvore
+ 1. Instalou a extensão correta do C/C++;
+ 2. vá até `.vscode/c_cpp_properties.json` e coloque os segunintes caminhos dentro de `"includePath"`:
+    - "C:\\MinGW\\include"
+    - "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0"
 
-Os arquivos de texto podem ser adicionados na pasta "data".
-Para usar no programa basta substituir o trecho "teste" pelo nome do arquivo.
-A função de busca é feito adicionando no comando o nome "lista" ou "arvore".
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:\\MinGW\\include",
+                "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0"
+            ],
 
-
-
-
-## Intruções para execução no windows
-
-Há função, como no caso do "strsep", que não é padrão na biblioteca string.h do windows.
-Nesse caso, colocamos uma implementação no arquivo windows.c e deve ser compilado como:
-gcc -c indexador.c -o indexador.o
-gcc -c arvore.c -o arvore.o
-gcc -c lista.c -o lista.o
-gcc -c windows.c -o windows.o
-gcc indexador.o arvore.o lista.o windows.o -o executavel
-
-E executado da mesma forma do caso anterior.
+3. Se ainda não deu certo, troque:
+    - `"compilerPath"` para `"C:\\MinGW\\bin\\gcc.exe"`
+    - `"intelliSenseMode"` para `"windows-gcc-x86"`

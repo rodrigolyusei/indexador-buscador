@@ -1,41 +1,37 @@
 
-## Instruções para compilação no VSCode
+# Indexador-Buscador
+É um programa produzido com o objetivo de estudar estrutura de dados e seus desempenhos. Tem como funcionamento receber um arquivo de texto e armazenar em uma lista ligada ou uma árvore binária. Depois recebe uma palavra do usuário a ser buscada na estrutura e apresenta o resultado de ocorrências junto com o tempo de execução da busca.
 
-Caso tenha problemas para compilar, primeiro verifique:
+## Instruções para execução pelo terminal
 
- 1. Instalou a extensão correta do C/C++;
- 2. vá até `.vscode/c_cpp_properties.json` e coloque os segunintes caminhos dentro de `"includePath"`:
-    - "C:\\MinGW\\include"
-    - "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0"
+### Compilação
 
-            "includePath": [
-                "${workspaceFolder}/**",
-                "C:\\MinGW\\include",
-                "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0"
-            ],
-
-3. Se ainda não deu certo, troque:
-    - `"compilerPath"` para `"C:\\MinGW\\bin\\gcc.exe"`
-    - `"intelliSenseMode"` para `"windows-gcc-x86"`
-
-## Instruções para execução
-
-Para compilar, use os comandos:
+Primeiro é necesário que esteja no diretório `/src` para compilar.\
+O compilador usado é o gcc, mas caso seja diferente basta substitur.
 
 ```
-gcc -c indexador.c -o indexador.o
-gcc -c arvore.c -o arvore.o
-gcc -c lista.c -o lista.o
-gcc -c windows.c -o windows.o
-gcc indexador.o arvore.o lista.o windows.o -o executavel
+gcc -Wall main.c arvore.c lista.c -o indexador
 ```
 
-Agora para executar:
+### Compilação no Windows
+
+Há uma função como o "strsep" que não é padrão na biblioteca string.h pelo MinGW no Windows.\
+Nesse caso, colocamos uma implementação no arquivo windows.c e deve ser compilado como:
 
 ```
-.\executavel.exe data/teste.txt
+gcc -Wall main.c arvore.c lista.c windows.c -o indexador
 ```
 
-## Considerações para a entrega
+### Execução
 
-Criamos a função strsep do zero já que ela não é padrão para bibliotecas do MinGW do Windows.
+Adicione os arquivos de texto a ser usado em `/data` e substitua o `teste`.\
+Indique a estrutura de dados usada no final, sendo `lista` ou `arvore`.\
+Caso não indique nada, o programa irá apenas imprimir as palavras do texto.
+
+```
+./indexador.exe data/teste.txt
+./indexador.exe data/teste.txt lista
+./indexador.exe data/teste.txt arvore
+```
+
+## Instruções para execução usando Makefile
