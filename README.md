@@ -30,19 +30,23 @@ Caso não indique nada, o programa irá apenas imprimir as palavras do texto.
 
 ```
 ./indexador.exe data/teste.txt
+```
+```
 ./indexador.exe data/teste.txt lista
+```
+```
 ./indexador.exe data/teste.txt arvore
 ```
 
 ## Instruções para execução usando Makefile
 
-Caso tenha o Makefile, basta usar o comando `make` e indicar qual compilação usar:
+Caso tenha o Makefile, a compilação é mais simples, basta indicar se está no Linux ou Windows.\
+É possível instalar o Makefile no Windows pelo gerenciador de pacotes ou coleção de ferramentas.\
+E para a execução, basta seguir pelos mesmos comandos acima.
 
 ```
 make lin
+```
+```
 make win
 ```
-
-Se estiver no Linux use a primeira opção, e no Windows a segunda.\
-A diferença é apenas as funções padrões explicadas acima.\
-Para a execução, basta seguir no mesmo método do terminal.
