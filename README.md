@@ -2,7 +2,7 @@
 # Indexador-Buscador
 É um programa produzido com o objetivo de estudar estrutura de dados e seus desempenhos. Tem como funcionamento receber um arquivo de texto e armazenar em uma lista ligada ou uma árvore binária. Depois recebe uma palavra do usuário a ser buscada na estrutura e apresenta o resultado de ocorrências junto com o tempo de execução da busca.
 
-## Instruções para execução pelo terminal
+## Instruções para execução usando diretamente o compilador
 
 ### Compilação
 
@@ -35,3 +35,14 @@ Caso não indique nada, o programa irá apenas imprimir as palavras do texto.
 ```
 
 ## Instruções para execução usando Makefile
+
+Caso tenha o Makefile, basta usar o comando `make` e indicar qual compilação usar:
+
+```
+make lin
+make win
+```
+
+Se estiver no Linux use a primeira opção, e no Windows a segunda.\
+A diferença é apenas as funções padrões explicadas acima.\
+Para a execução, basta seguir no mesmo método do terminal.
