@@ -10,7 +10,7 @@ Primeiro é necesário que esteja no diretório `/src` para compilar.\
 O compilador usado é o gcc, mas caso seja diferente basta substitur.
 
 ```
-gcc -Wall main.c arvore.c lista.c -o indexador
+gcc -Wall src/main.c src/arvore.c src/lista.c -o indexador
 ```
 
 ### Compilação no Windows
@@ -19,7 +19,7 @@ Há uma função como o "strsep" que não é padrão na biblioteca string.h pelo
 Nesse caso, colocamos uma implementação no arquivo windows.c e deve ser compilado como:
 
 ```
-gcc -Wall main.c arvore.c lista.c windows.c -o indexador
+gcc -Wall src/main.c src/arvore.c src/lista.c src/windows.c -o indexador
 ```
 
 ### Execução
