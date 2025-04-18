@@ -1,4 +1,4 @@
-# indexador-buscador-em-c
+# Indexador e Buscador em C
 É um programa em C produzido com o objetivo de estudar estrutura de dados e seus desempenhos, usado para comparar com a implementação em outras linguagens também. Tem como funcionamento receber um arquivo de texto e armazenar em uma lista ligada ou uma árvore binária. Depois recebe uma palavra do usuário a ser buscada na estrutura e apresenta o resultado de ocorrências junto com o tempo de execução da busca.
 
 ## Instruções para execução usando diretamente o compilador
