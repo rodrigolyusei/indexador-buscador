@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "arvore.h"
-#include "windows.h"
+#include "extra.h"
 
 Arvore* cria_arvore(){
 	Arvore* arvore =  (Arvore*) malloc (sizeof(Arvore));

@@ -1,23 +1,25 @@
-# Indexador e Buscador em C
-É um programa em C produzido com o objetivo de estudar estrutura de dados e seus desempenhos, usado para comparar com a implementação em outras linguagens também. Tem como funcionamento receber um arquivo de texto e armazenar em uma lista ligada ou uma árvore binária. Depois recebe uma palavra do usuário a ser buscada na estrutura e apresenta o resultado de ocorrências junto com o tempo de execução da busca.
+# Indexador e Buscador de Palavras
+Programa desenvolvido com o objetivo de estudar estrutura de dados e comparar seus desempenhos, considerando a implementação nas diferentes linguagens. Tem como funcionamento receber um arquivo de texto e armazenar em uma lista ligada ou uma árvore binária. Depois recebe uma palavra da entrada a ser buscada na estrutura e apresenta o resultado de ocorrências junto com o tempo de execução da busca.
+
+![Go](https://img.shields.io/badge/language-c-lightblue)
+![JavaScript](https://img.shields.io/badge/language-java-red)
+![Python](https://img.shields.io/badge/language-python-blue)
 
 ## Compilar pelo compilador
 
-### Compilação no Linux
-
-O compilador usado é o gcc, mas caso seja diferente basta substitur.
+### Compilação em C
 
 ```
-gcc -Wall src/main.c src/arvore.c src/lista.c -o indexador
+cd src/c/
+gcc -Wall main.c arvore.c lista.c extra.c -o ../../indexador
+cd ../../
 ```
-
-### Compilação no Windows
-
-Há uma função como o "strsep" que não é padrão na biblioteca string.h pelo MinGW no Windows.\
-Nesse caso, colocamos uma implementação no arquivo windows.c e deve ser compilado como:
+### Compilação em Java
 
 ```
-gcc -Wall src/main.c src/arvore.c src/lista.c src/windows.c -o indexador
+cd src/java/
+javac Indexador.java -d ../../
+cd ../../
 ```
 
 ## Compilar pelo Makefile

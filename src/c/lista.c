@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lista.h"
-#include "windows.h"
+#include "extra.h"
 
 Lista* cria_lista(){
 	Lista* lista =  (Lista*) malloc (sizeof(Lista));

@@ -1,6 +1,6 @@
 #include <string.h>
 #include <ctype.h>
-#include "windows.h"
+#include "extra.h"
 
 char *strsep(char **stringp, const char *delim) {
     char *rv = *stringp;
